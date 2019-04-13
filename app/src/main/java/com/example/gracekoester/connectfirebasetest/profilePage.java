@@ -48,11 +48,10 @@ public class profilePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_page);
+        setContentView(R.layout.activity_profile_page2);
         mAuth = FirebaseAuth.getInstance();
 
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
 
         editText = (EditText) findViewById(R.id.displayNameEditText);
         imageView = (ImageView) findViewById(R.id.uploadPicButton);
@@ -66,7 +65,7 @@ public class profilePage extends AppCompatActivity {
             }
         });
 
-        loadUserInformation();
+        //loadUserInformation();
 
         findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +99,7 @@ public class profilePage extends AppCompatActivity {
                 editText.setText(user.getDisplayName());
             }
 
-            if (user.isEmailVerified()) {
+            /*if (user.isEmailVerified()) {
                 textView.setText("Email Verified");
             } else {
                 textView.setText("Email Not Verified (Click to Verify)");
@@ -114,8 +113,8 @@ public class profilePage extends AppCompatActivity {
                             }
                         });
                     }
-                });
-            }
+                });*/
+            //}
         }
     }
 

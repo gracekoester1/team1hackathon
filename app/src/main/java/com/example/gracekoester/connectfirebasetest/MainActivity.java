@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -20,11 +21,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseAuth mAuth;   //initializes firebase
     EditText editTextEmail, editTextPassword;
     ProgressBar progressBar;
+    Button goToMainPage;
+    MainActivity myself;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.myself = this;
 
         mAuth = FirebaseAuth.getInstance();      //checks if user is signed in or out
 
@@ -79,9 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
-                    finish();
-                   Intent intent = new Intent(MainActivity.this, profilePage.class);
-                   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                   Intent intent = new Intent(myself, homeScreen.class);
+                   //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -96,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
 
         if (mAuth.getCurrentUser() != null) {
-            //finish();
-            //startActivity(new Intent(this, profilePage.class));
+            finish();
+            startActivity(new Intent(this, homeScreen.class));
         }
     }
 
